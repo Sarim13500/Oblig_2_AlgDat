@@ -20,6 +20,7 @@ class Oblig2Test {
         if (liste.tom() != true) {
             antallFeil++;
             System.out.println("Oppgave 1b: Feil i metoden tom()!");
+
         }
 
         try {
