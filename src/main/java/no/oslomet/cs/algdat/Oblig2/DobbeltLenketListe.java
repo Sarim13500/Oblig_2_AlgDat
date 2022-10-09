@@ -41,8 +41,51 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-        throw new UnsupportedOperationException();
-    }
+
+        if (a == null){
+
+            throw new NullPointerException("Tabellen a er null!");
+        }
+
+        if (a.length > 0){
+
+            int teller = 0;
+
+            while (teller < a.length){
+
+                if (a[teller] != null){
+                    hode = new Node<>(a[teller]);
+                    antall++;
+                    break;
+                }
+                teller++;
+            }
+
+            hale = hode;
+
+
+            if (hale != null){
+                teller++;
+
+
+                while (teller < a.length){
+
+                    if (a[teller] != null){
+
+                        hale = hale.neste = new Node<>(a[teller],hale,null);
+                        //(hale.neste).forrige = hale;
+                        //hale = hale.neste;
+                        antall++;
+
+                    }
+                    teller++;
+                }
+            }
+        }
+
+        //throw new UnsupportedOperationException();
+    } // Generisk Metode
+
 
     public Liste<T> subliste(int fra, int til) {
         throw new UnsupportedOperationException();
@@ -50,13 +93,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        throw new UnsupportedOperationException();
+        return antall;
+        //throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+        return antall == 0;
+        //throw new UnsupportedOperationException();
     }
+
 
     @Override
     public boolean leggInn(T verdi) {
@@ -158,5 +204,4 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
 } // class DobbeltLenketListe
-
 
