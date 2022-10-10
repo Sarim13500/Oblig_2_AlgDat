@@ -206,7 +206,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             Node<T> current = hale;
             s.append(current.verdi);
 
-            //current = current.forrige;
+            // current = current.forrige;
 
             while (current.forrige != null)  // tar med resten hvis det er noe mer
             {
