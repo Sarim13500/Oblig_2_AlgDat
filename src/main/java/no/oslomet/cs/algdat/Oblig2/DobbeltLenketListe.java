@@ -197,7 +197,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public String omvendtString() {
 
-        StringBuilder s = new StringBuilder();
+        StringBuilder s = new StringBuilder(); // String ut = "";
 
         s.append('[');
 
