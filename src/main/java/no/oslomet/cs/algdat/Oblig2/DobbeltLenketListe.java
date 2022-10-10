@@ -37,7 +37,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new UnsupportedOperationException();
+        hode = hale = null;
+        antall = 0;
+        endringer = 0;
+        //throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
@@ -79,17 +82,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
                     }
                     teller++;
+
                 }
+
+
             }
+
         }
 
         //throw new UnsupportedOperationException();
     } // Generisk Metode
 
 
+
     public Liste<T> subliste(int fra, int til) {
         throw new UnsupportedOperationException();
     }
+
 
     @Override
     public int antall() {
@@ -204,4 +213,3 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
 } // class DobbeltLenketListe
-
