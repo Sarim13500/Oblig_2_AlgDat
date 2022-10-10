@@ -6,6 +6,7 @@ package no.oslomet.cs.algdat.Oblig2;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -138,10 +139,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new UnsupportedOperationException();
     }
 
+
     @Override
     public T hent(int indeks) {
-        throw new UnsupportedOperationException();
+
+        indeksKontroll(indeks,false);
+        if (finnNode(indeks) != null){
+            return finnNode(indeks).verdi;
+        }
+        return null;
+
+
+
+        //throw new UnsupportedOperationException();
     }
+
 
     @Override
     public int indeksTil(T verdi) {
@@ -150,8 +162,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+
+        Objects.requireNonNull(nyverdi, "Ikke tillatt med null-verdier!");
+
+        indeksKontroll(indeks, false);  // Se Liste, false: indeks = antall er ulovlig
+
+        Node<T> p = finnNode(indeks);
+        T gammelVerdi = p.verdi;
+
+        p.verdi = nyverdi;
+        endringer++;
+        return gammelVerdi;
+
+        //throw new UnsupportedOperationException();
     }
+
 
     @Override
     public boolean fjern(T verdi) {
