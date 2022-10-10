@@ -2,15 +2,10 @@
 
 Denne oppgaven er en innlevering i Algoritmer og Datastrukturer. Medlemmer i gruppen:
 
-Abdul Moiz Ehsan: s364554
-
-Ali Haider Khan: s364688
-
-Mohammed Junaid Ali: s364589
-
 Sarim Asher Saeed: s362123
 
 Saqlain Rehman: s364567
+
 # Arbeidsfordeling
 
 I oppgaven har vi hatt følgende arbeidsfordeling:
