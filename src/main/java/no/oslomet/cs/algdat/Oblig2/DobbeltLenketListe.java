@@ -61,6 +61,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
     }
 
+    private void fraTilKontroll(int tabellengde, int fra, int til){
+
+        if (fra < 0)                                  // fra er negativ
+            throw new IndexOutOfBoundsException
+                    ("fra(" + fra + ") er negativ!");
+
+        if (til > tabellengde)                          // til er utenfor tabellen
+            throw new IndexOutOfBoundsException
+                    ("til(" + til + ") > antall(" + tabellengde + ")");
+
+        if (fra > til)                                // fra er større enn til
+            throw new IllegalArgumentException
+                    ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+
+    }
+
+
     public DobbeltLenketListe(T[] a) {
 
         if (a == null){
@@ -114,8 +131,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     public Liste<T> subliste(int fra, int til) {
-        throw new UnsupportedOperationException();
+
+        fraTilKontroll(antall,fra,til);
+
+        Liste<T> liste = new DobbeltLenketListe<>();
+        int tabellengde = til-fra;
+
+        if (tabellengde < 1) return liste;
+
+        Node<T> current = finnNode(fra);
+
+        for (int i = fra; i < til; i++){ // int i = tabellengde; i > 0; i--
+            liste.leggInn(current.verdi);
+            current = current.neste;
+
+        }
+
+        return liste;
+
+
+        //throw new UnsupportedOperationException();
     }
+
 
 
     @Override
@@ -153,7 +190,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+
+        if (indeksTil(verdi) == -1) {
+            return false;
+        }
+
+        return true;
+
+        //throw new UnsupportedOperationException();
     }
 
 
@@ -174,7 +218,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
-        throw new UnsupportedOperationException();
+
+        if (verdi == null) return -1;
+
+        Node<T> indeks = hode;
+
+        for (int i = 0; i < antall; i++){
+
+            if (indeks.verdi.equals(verdi)){
+                return i;
+            }
+            indeks = indeks.neste;
+        }
+
+        return -1;
+
+        //throw new UnsupportedOperationException();
     }
 
     @Override
