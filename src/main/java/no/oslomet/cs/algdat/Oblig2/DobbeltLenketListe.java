@@ -290,20 +290,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean fjern(T verdi) {
         //throw new UnsupportedOperationException();
 
-        if (inneholder(verdi)){
+        if (inneholder(verdi)){                               //Sjekker om verdien fins i listen vår
 
-            fjern(indeksTil(verdi));
+            fjern(indeksTil(verdi));                         //Bruker fjern metoden og indeks til metoden
+                                                             // for å fjerne verdi fra listen
             return true;
         }
         else {
-
         }
-
-
-
         return false;
-
-
     }
 
 
@@ -312,7 +307,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         //Objects.requireNonNull(indeks, "Ikke tillatt med null-verdier!");
 
-        if (tom()){
+        if (tom()){                                            //Hvis listen er tom vil ikke metoden gjøre noe
             //System.out.println("Listen er tom");
             throw new IndexOutOfBoundsException("Listen er tom");
             //throw new IndexOutOfBoundsException();
@@ -321,47 +316,47 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         if (indeks>antall-1 || indeks<0){
 
-            // System.out.println("Ikke lovlig indeks valg");
+            // System.out.println("Ikke lovlig indeks valg");                   //Sjekker om indeksen gjelder for listen
             indeksKontroll(indeks, false);
         }else {
-            if (indeks == 0) {
+            if (indeks == 0) {                                  //Hvis hode fjernes
 
                 T verdi = finnNode(indeks).verdi;
                 Node<T> fjerne = finnNode(indeks);
 
                 Node<T> temp = finnNode(indeks + 1);
-                temp.forrige = null;
-                hode = temp;
+                temp.forrige = null;                           //Oppdaterer pekere
+                hode = temp;                                   //Oppdaterer hode
                 fjerne.neste = null;
 
                 antall--;                              // reduserer antallet
                 endringer++;
                 return verdi;                         // returner fjernet verdi
 
-            } else if (indeks == antall - 1) {
+            } else if (indeks == antall - 1) {              //Fjerner hale
 
                 T verdi = finnNode(indeks).verdi;
                 Node<T> fjerne = finnNode(indeks);
 
 
                 Node<T> temp = finnNode(indeks - 1);
-                temp.neste = null;
-                hale = temp;
+                temp.neste = null;                           //Oppdaterer pekere
+                hale = temp;                                 //Oppdaterer hale
                 fjerne.forrige = null;
 
-                antall--;                   // reduserer antallet
+                antall--;                             // reduserer antallet
                 endringer++;
                 return verdi;                         // returner fjernet verdi
 
             } else {
-                T verdi = finnNode(indeks).verdi;
+                T verdi = finnNode(indeks).verdi;              //Fjerner en verdi i midten
                 Node<T> fjerne = finnNode(indeks);
 
 
                 Node<T> temp = finnNode(indeks - 1);
                 Node<T> temp2 = finnNode(indeks + 1);
                 temp.neste = temp2;
-                temp2.forrige = temp;
+                temp2.forrige = temp;                             //Oppdaterer pekere
                 fjerne.neste = fjerne.forrige = null;
 
 
