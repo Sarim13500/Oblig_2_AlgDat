@@ -288,13 +288,94 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+
+        if (inneholder(verdi)){
+
+            fjern(indeksTil(verdi));
+            return true;
+        }
+        else {
+
+        }
+
+
+
+        return false;
+
+
     }
+
 
     @Override
     public T fjern(int indeks) {
-        throw new UnsupportedOperationException();
+
+        //Objects.requireNonNull(indeks, "Ikke tillatt med null-verdier!");
+
+        if (tom()){
+            //System.out.println("Listen er tom");
+            throw new IndexOutOfBoundsException("Listen er tom");
+            //throw new IndexOutOfBoundsException();
+
+        }
+
+        if (indeks>antall-1 || indeks<0){
+
+            // System.out.println("Ikke lovlig indeks valg");
+            indeksKontroll(indeks, false);
+        }else {
+            if (indeks == 0) {
+
+                T verdi = finnNode(indeks).verdi;
+                Node<T> fjerne = finnNode(indeks);
+
+                Node<T> temp = finnNode(indeks + 1);
+                temp.forrige = null;
+                hode = temp;
+                fjerne.neste = null;
+
+                antall--;                              // reduserer antallet
+                endringer++;
+                return verdi;                         // returner fjernet verdi
+
+            } else if (indeks == antall - 1) {
+
+                T verdi = finnNode(indeks).verdi;
+                Node<T> fjerne = finnNode(indeks);
+
+
+                Node<T> temp = finnNode(indeks - 1);
+                temp.neste = null;
+                hale = temp;
+                fjerne.forrige = null;
+
+                antall--;                   // reduserer antallet
+                endringer++;
+                return verdi;                         // returner fjernet verdi
+
+            } else {
+                T verdi = finnNode(indeks).verdi;
+                Node<T> fjerne = finnNode(indeks);
+
+
+                Node<T> temp = finnNode(indeks - 1);
+                Node<T> temp2 = finnNode(indeks + 1);
+                temp.neste = temp2;
+                temp2.forrige = temp;
+                fjerne.neste = fjerne.forrige = null;
+
+
+                antall--;                   // reduserer antallet
+                endringer++;
+                return verdi;                         // returner fjernet verdi
+
+            }
+
+        }
+        return null;  //Må returnere noe annet, dette er bare for å komme forbi feil
+        // throw new UnsupportedOperationException();
     }
+
 
     @Override
     public void nullstill() {
