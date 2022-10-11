@@ -199,6 +199,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 hode = hode.forrige = new Node<T>(verdi, null, hode);// legges først
             }
         }
+        else if (indeks == antall)           // ny verdi skal ligge bakerst
+        {
+            hale = hale.neste = new Node<T>(verdi, hale, null);
+        }
+
+
+        else
+        {
+            Node<T> p = finnNode(indeks-1);// p flyttes indeks - 1 ganger
+            Node<T> q = new Node<T>(verdi,p,p.neste); //Oppdaterer pekere til q
+            p.neste.forrige = q;
+            p.neste = q;
+
+        }
+
+        antall++;// listen har fått en ny verdi
+        endringer++;
+
         //throw new UnsupportedOperationException();
     }
 
