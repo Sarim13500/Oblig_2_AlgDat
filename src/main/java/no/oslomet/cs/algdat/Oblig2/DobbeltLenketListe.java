@@ -299,7 +299,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void nullstill() {
 
-        //throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -333,24 +333,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         StringBuilder s = new StringBuilder(); // String ut = "";
 
-        s.append('[');
+        s.append('['); // ut += "["
 
-        if (!tom() && hale != null)
+        if (!tom() && hale != null) // sjekker om lista ikke er tom og om hale har en verdi
         {
             Node<T> current = hale;
             s.append(current.verdi);
 
-            //current = current.forrige;
-
             while (current.forrige != null)  // tar med resten hvis det er noe mer
             {
                 current = current.forrige;
-                s.append(',').append(' ').append(current.verdi);
+                s.append(',').append(' ').append(current.verdi); // ut += ", " + current.verdi
 
             }
         }
 
-        s.append(']');
+        s.append(']'); // ut += "]"
 
         return s.toString();
 
