@@ -290,14 +290,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean fjern(T verdi) {
         //throw new UnsupportedOperationException();
 
-        if (inneholder(verdi)){                               //Sjekker om verdien fins i listen vår
+        if (verdi == null) return false;
 
-            fjern(indeksTil(verdi));                         //Bruker fjern metoden og indeks til metoden
-                                                             // for å fjerne verdi fra listen
+        Node<T> current = hode;
+        if (verdi.equals(current.verdi)){
+            if (current.neste == null){
+                hode = null;
+                hale = null;
+            }
+            else {
+                hode = current.neste;
+                hode.forrige = null;
+            }
+
+            endringer++;
+            antall--;
             return true;
         }
-        else {
-        }
+        
         return false;
     }
 
