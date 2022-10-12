@@ -78,39 +78,37 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public DobbeltLenketListe(T[] a) {
 
-        if (a == null){
+        if (a == null){ //Kastes unntak dersom a er null
 
             throw new NullPointerException("Tabellen a er null!");
         }
 
-        if (a.length > 0){
+        if (a.length > 0){  // utfører koden dersom lengden til a er større enn 0
 
             int teller = 0;
 
-            while (teller < a.length){
+            while (teller < a.length){ // I denne løkken settes opp hode-verdien
 
-                if (a[teller] != null){
-                    hode = new Node<>(a[teller]);
+                if (a[teller] != null){ //Vil bare lage en ny node dersom verdien i arrayet ikke er null
+                    hode = new Node<>(a[teller]); //
                     antall++;
                     break;
                 }
                 teller++;
             }
 
-            hale = hode;
+            hale = hode; // Setter begge pekerne på første node
 
 
             if (hale != null){
                 teller++;
 
 
-                while (teller < a.length){
+                while (teller < a.length){ // I denne løkken lages resten av nodene ved hjelp av hale pekeren
 
                     if (a[teller] != null){
 
-                        hale = hale.neste = new Node<>(a[teller],hale,null);
-                        //(hale.neste).forrige = hale;
-                        //hale = hale.neste;
+                        hale = hale.neste = new Node<>(a[teller],hale,null); //Passer på at siste noden er hale
                         antall++;
 
                     }
@@ -130,22 +128,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public Liste<T> subliste(int fra, int til) {
 
-        fraTilKontroll(antall,fra,til);
+        fraTilKontroll(antall,fra,til); //Sjekker om parameterne er riktig
 
-        Liste<T> liste = new DobbeltLenketListe<>();
-        int tabellengde = til-fra;
+        Liste<T> subliste = new DobbeltLenketListe<>(); // Setter opp ny liste som skal være sublisten
+        int tabellengde = til-fra; //
 
-        if (tabellengde < 1) return liste;
+        if (tabellengde < 1) return subliste; //Dersom intervallet er tomt sendes en tom liste tilbake
 
-        Node<T> current = finnNode(fra);
+        Node<T> current = finnNode(fra); //Starter å lage sublisten fra "fra-variablen"
 
-        for (int i = fra; i < til; i++){ // int i = tabellengde; i > 0; i--
-            liste.leggInn(current.verdi);
+        for (int i = fra; i < til; i++){ // legger til verdiene i sublisten
+            subliste.leggInn(current.verdi);
             current = current.neste;
 
         }
 
-        return liste;
+        return subliste;
 
 
         //throw new UnsupportedOperationException();
@@ -161,7 +159,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean tom() {
-        return antall == 0;
+        return antall == 0; //return antall > 0 ? false:true
         //throw new UnsupportedOperationException();
     }
 
@@ -221,7 +219,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean inneholder(T verdi) {
 
-        if (indeksTil(verdi) == -1) {
+        if (indeksTil(verdi) == -1) { //Hvis indeksTil metoden returnerer -1 vil det si at verdien ikke er i lista
             return false;
         }
 
@@ -247,14 +245,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public int indeksTil(T verdi) {
 
-        if (verdi == null) return -1;
+        if (verdi == null) return -1; // Returnerer -1 dersom verdien er null
 
         Node<T> indeks = hode;
 
         for (int i = 0; i < antall; i++){
 
-            if (indeks.verdi.equals(verdi)){
-                return i;
+            if (indeks.verdi.equals(verdi)){ //Søker gjennom den lenkete lista
+                return i;                    //returnerer indeken i dersom verdiene er lik hver andre
             }
             indeks = indeks.neste;
         }
@@ -289,14 +287,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (verdi == null) return false;
 
         Node<T> current = hode;
-        if (verdi.equals(current.verdi)){
-            if (current.neste == null){
-                hode = null;
+        if (verdi.equals(current.verdi)){ // Situasjon 1: Første verdi i lista fjernes
+            if (current.neste == null){  //  Dersom det ikke er flere verdier/noder i lista settes hode og hale peker
+                hode = null;              // til null
                 hale = null;
             }
             else {
-                hode = current.neste;
-                hode.forrige = null;
+                hode = current.neste; //Hvis det er flere verdier i lista fjernes første verdien og den neste verdien
+                hode.forrige = null;  // settes som hode
             }
 
             endringer++;
@@ -305,10 +303,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         current = hode.neste;
-        while (current != null && current.neste != null){
+        while (current != null && current.neste != null){ // Situasjon 2: Mellomste fjernes
             if (verdi.equals(current.verdi)){
-                current.forrige.neste = current.neste;
-                current.neste.forrige = current.forrige;
+                current.forrige.neste = current.neste; //Fjerner forrige og neste peker til noden som skal fjernes
+                current.neste.forrige = current.forrige;//garbageCollector fikser resten
                 endringer++;
                 antall--;
                 return true;
@@ -317,7 +315,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         current = hale;
-        if (verdi.equals(current.verdi)) {
+        if (verdi.equals(current.verdi)) { //Situasjon 3: Siste verdien fjernes
             hale = current.forrige;
             hale.neste = null;
             antall--;
@@ -406,7 +404,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         Node<T> current = hode;
 
-        while (current != null){
+        while (current != null){ // Vi vil fortsette å nulle ut nodene så lenge current ikke er null
 
             current.verdi = null;
             current.forrige = null;
@@ -416,7 +414,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         hode = null;
-        hale = null;
+        hale = null; // Til slutt nulles ut hode og hale-peker og antall
         antall = 0;
         endringer++;
 
@@ -494,9 +492,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private int iteratorendringer;
 
         private DobbeltLenketListeIterator() {
-            denne = hode;     // p starter på den første i listen
-            fjernOK = false;  // blir sann når next() kalles
-            iteratorendringer = endringer;  // teller endringer
+            denne = hode;
+            fjernOK = false;
+            iteratorendringer = endringer;
         }
 
         private DobbeltLenketListeIterator(int indeks) {
