@@ -125,7 +125,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     } // Generisk Metode
 
 
-
     public Liste<T> subliste(int fra, int til) {
 
         fraTilKontroll(antall,fra,til); //Sjekker om parameterne er riktig
@@ -162,7 +161,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return antall == 0; //return antall > 0 ? false:true
         //throw new UnsupportedOperationException();
     }
-
 
     @Override
     public boolean leggInn(T verdi) {
@@ -228,7 +226,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
     }
 
-
     @Override
     public T hent(int indeks) {
 
@@ -240,7 +237,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         //throw new UnsupportedOperationException();
     }
-
 
     @Override
     public int indeksTil(T verdi) {
@@ -278,7 +274,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         //throw new UnsupportedOperationException();
     }
-
 
     @Override
     public boolean fjern(T verdi) {
@@ -324,7 +319,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         return false;
     }
-
 
     @Override
     public T fjern(int indeks) {
@@ -398,7 +392,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // throw new UnsupportedOperationException();
     }
 
-
     @Override
     public void nullstill() {
 
@@ -417,6 +410,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         hale = null; // Til slutt nulles ut hode og hale-peker og antall
         antall = 0;
         endringer++;
+
+        /* Dette er den andre metoden basert på fjern metoden som vi ikke valgte å bruke. Tar lenger tid
+        for (Node<T> current = hode; current != null; current=current.neste){
+            fjern(0);
+        }
+         */
 
         //throw new UnsupportedOperationException();
     }
