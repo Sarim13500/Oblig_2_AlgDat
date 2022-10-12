@@ -242,8 +242,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         return null;
 
-
-
         //throw new UnsupportedOperationException();
     }
 
@@ -307,7 +305,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             antall--;
             return true;
         }
-        
+
+        current = hode.neste;
+        while (current != null && current.neste != null){
+            if (verdi.equals(current.verdi)){
+                current.forrige.neste = current.neste;
+                current.neste.forrige = current.forrige;
+                endringer++;
+                antall--;
+                return true;
+            }
+            current = current.neste;
+        }
+
+        current = hale;
+        if (verdi.equals(current.verdi)) {
+            hale = current.forrige;
+            hale.neste = null;
+            antall--;
+            endringer++;
+            return true;
+        }
         return false;
     }
 
@@ -328,7 +346,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
             // System.out.println("Ikke lovlig indeks valg");                   //Sjekker om indeksen gjelder for listen
             indeksKontroll(indeks, false);
-        }else {
+        }
+        else {
             if (indeks == 0) {                                  //Hvis hode fjernes
 
                 T verdi = finnNode(indeks).verdi;
@@ -343,7 +362,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 endringer++;
                 return verdi;                         // returner fjernet verdi
 
-            } else if (indeks == antall - 1) {              //Fjerner hale
+            }
+            else if (indeks == antall - 1) {              //Fjerner hale
 
                 T verdi = finnNode(indeks).verdi;
                 Node<T> fjerne = finnNode(indeks);
@@ -358,7 +378,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 endringer++;
                 return verdi;                         // returner fjernet verdi
 
-            } else {
+            }
+            else {
                 T verdi = finnNode(indeks).verdi;              //Fjerner en verdi i midten
                 Node<T> fjerne = finnNode(indeks);
 
@@ -385,7 +406,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void nullstill() {
 
-        throw new UnsupportedOperationException();
+        
+
+        //throw new UnsupportedOperationException();
     }
 
     @Override
