@@ -478,7 +478,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
+        return new DobbeltLenketListeIterator();
+        //throw new UnsupportedOperationException();
     }
 
     public Iterator<T> iterator(int indeks) {
@@ -511,7 +512,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             if (!hasNext()) throw new NoSuchElementException("Ingen verdier!");
             if (iteratorendringer != endringer) throw new ConcurrentModificationException();
 
-            return null;
+            fjernOK = true;
+            T tempverdi= denne.verdi;
+            denne=denne.neste;
+
+            return tempverdi;
             //throw new UnsupportedOperationException();
         }
 
