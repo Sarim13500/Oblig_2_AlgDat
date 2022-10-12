@@ -4,7 +4,7 @@ Denne oppgaven er en innlevering i Algoritmer og Datastrukturer. Medlemmer i gru
 
 Sarim Asher Saeed: s362123
 
-Saqlain Rehman: s364567
+Mohammad Saqlain Ur Rehman: s364567
 
 # Arbeidsfordeling
 
